@@ -15,9 +15,8 @@ describe Processador do
       grupos = @processador.gerar_grupos
 
       expect(grupos.size).to eql 2
-      grupos.each do |grupo|
-        expect(grupo).to be_kind_of Grupo
-      end
+      expect(grupos.at(0).nome).to eql "A"
+      expect(grupos.at(1).nome).to eql "B"
     end
 
     context "quando o arquivo não existe" do

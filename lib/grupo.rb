@@ -1,7 +1,8 @@
 class Grupo
-  attr_reader :nome
+  attr_reader :nome, :times
 
-  def initialize nome
-    @nome = nome
+  def initialize attrs = {}
+    @nome = attrs["grupo"]
+    @times = attrs["times"]
   end
 end

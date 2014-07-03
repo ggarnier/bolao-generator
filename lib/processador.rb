@@ -9,7 +9,7 @@ class Processador
   def gerar_grupos
     processar_arquivo
 
-    @dados.map {|item| Grupo.new(item["grupo"]) }
+    @dados.map {|item| Grupo.new(item) }
   end
 
   private

@@ -19,6 +19,13 @@ describe Processador do
       expect(grupos.at(1).nome).to eql "B"
     end
 
+    it "deveria gerar os times dos grupos" do
+      grupos = @processador.gerar_grupos
+
+      expect(grupos.at(0).times).to eql ["Brasil", "Croácia", "México", "Camarões"]
+      expect(grupos.at(1).times).to eql ["Holanda", "Espanha", "Chile", "Austrália"]
+    end
+
     context "quando o arquivo não existe" do
       let :path_arquivo do
         "./spec/fixtures/nao_existe.json"

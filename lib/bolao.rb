@@ -1,0 +1,19 @@
+require File.expand_path(File.join(File.dirname(__FILE__), 'grupo'))
+
+class Bolao
+  def initialize grupo
+    @grupo = grupo
+  end
+
+  def chutar
+    @grupo.jogos.map do |jogo|
+      jogo.atualizar_placar(gerar_random, gerar_random)
+      jogo.placar
+    end
+  end
+
+  private
+  def gerar_random
+    rand(5)
+  end
+end

@@ -11,7 +11,10 @@ describe Grupo do
       jogos = @grupo.jogos
 
       expect(jogos.size).to eql 6
-      expect(jogos.first).to eql "Brasil x Croácia"
+      jogos.each do |jogo|
+        expect(jogo).to be_kind_of Jogo
+      end
+      expect(jogos.first.placar).to eql "Brasil 0 x 0 Croácia"
     end
   end
 end

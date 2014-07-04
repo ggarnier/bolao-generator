@@ -3,7 +3,7 @@ require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib', 'jogo'))
 
 describe Jogo do
   before do
-    @jogo = Jogo.new("Brasil", "Croácia")
+    @jogo = Jogo.new(Selecao.new("Brasil"), Selecao.new("Croácia"))
   end
 
   describe "#placar" do

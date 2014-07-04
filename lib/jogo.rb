@@ -12,6 +12,6 @@ class Jogo
   end
 
   def placar
-    "#{@time1} #{@gols_time1} x #{@gols_time2} #{@time2}"
+    "#{@time1.nome} #{@gols_time1} x #{@gols_time2} #{@time2.nome}"
   end
 end

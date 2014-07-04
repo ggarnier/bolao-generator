@@ -6,6 +6,13 @@ describe Grupo do
     @grupo = Grupo.new("grupo" => "A", "times" => %w{Brasil Croácia México Camarões})
   end
 
+  it "deveria instanciar os times" do
+    expect(@grupo.times.size).to eql 4
+    @grupo.times.each do |time|
+      expect(time).to be_kind_of Selecao
+    end
+  end
+
   describe "#jogos" do
     it "deveria exibir os jogos do grupo" do
       jogos = @grupo.jogos

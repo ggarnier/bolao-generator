@@ -1,21 +1,17 @@
-require File.expand_path(File.join(File.dirname(__FILE__), 'grupo'))
+require File.expand_path(File.join(File.dirname(__FILE__), 'copa'))
 
 class Bolao
-  attr_reader :grupos
+  attr_reader :copa
 
-  def initialize grupos
-    @grupos = grupos
+  def initialize copa
+    @copa = copa
   end
 
   def chutar!
-    jogos.map do |jogo|
+    @copa.jogos.map do |jogo|
       jogo.atualizar_placar(gerar_random, gerar_random)
       jogo.placar
     end
-  end
-
-  def jogos
-    @jogos ||= @grupos.map(&:jogos).flatten
   end
 
   private

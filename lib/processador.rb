@@ -16,6 +16,6 @@ class Processador
   def processar_arquivo
     @dados = JSON.parse(File.read(@arquivo))
   rescue Errno::ENOENT, JSON::ParserError
-    raise ArgumentError
+    raise ArgumentError.new("erro ao processar o arquivo #{@arquivo}")
   end
 end

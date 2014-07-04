@@ -1,15 +1,21 @@
 require File.expand_path(File.join(File.dirname(__FILE__), 'grupo'))
 
 class Bolao
-  def initialize grupo
-    @grupo = grupo
+  attr_reader :grupos
+
+  def initialize grupos
+    @grupos = grupos
   end
 
-  def chutar
-    @grupo.jogos.map do |jogo|
+  def chutar!
+    jogos.map do |jogo|
       jogo.atualizar_placar(gerar_random, gerar_random)
       jogo.placar
     end
+  end
+
+  def jogos
+    @jogos ||= @grupos.map(&:jogos).flatten
   end
 
   private

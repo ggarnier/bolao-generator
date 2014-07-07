@@ -9,7 +9,7 @@ class Bolao
 
   def chutar!
     @copa.jogos.map do |jogo|
-      jogo.atualizar_placar(gerar_random, gerar_random)
+      jogo.atualizar_placar!(gerar_random, gerar_random)
       jogo.placar
     end
   end

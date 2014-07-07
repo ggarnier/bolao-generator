@@ -13,7 +13,7 @@ describe Bolao do
   describe "#chutar!" do
     it "deveria gerar chutes para todos os jogos dos grupos" do
       @grupos.map(&:jogos).flatten.each do |jogo|
-        expect(jogo).to receive(:atualizar_placar)
+        expect(jogo).to receive(:atualizar_placar!)
       end
 
       @bolao.chutar!

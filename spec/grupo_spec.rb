@@ -24,4 +24,25 @@ describe Grupo do
       expect(jogos.first.placar).to eql "Brasil 0 x 0 Croácia"
     end
   end
+
+  describe "#atualizar_classificacao!" do
+    before do
+      @grupo.jogos.at(0).atualizar_placar!(3, 1)
+      @grupo.jogos.at(1).atualizar_placar!(0, 0)
+      @grupo.jogos.at(2).atualizar_placar!(4, 1)
+      @grupo.jogos.at(3).atualizar_placar!(1, 3)
+      @grupo.jogos.at(4).atualizar_placar!(4, 0)
+      @grupo.jogos.at(5).atualizar_placar!(1, 0)
+
+      @grupo.atualizar_classificacao!
+    end
+
+    it "deveria atualizar o número de pontos de cada time do grupo" do
+      expect(@grupo.times.map(&:pontos)).to eql [7, 7, 3, 0]
+    end
+
+    it "deveria reordenar os times de acordo com a classificação" do
+      expect(@grupo.times.map(&:nome)).to eql %w{Brasil México Croácia Camarões}
+    end
+  end
 end

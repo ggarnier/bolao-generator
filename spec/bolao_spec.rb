@@ -18,5 +18,13 @@ describe Bolao do
 
       @bolao.chutar!
     end
+
+    it "deveria atualizar a classificação de todos os grupos" do
+      @grupos.each do |grupo|
+        expect(grupo).to receive(:atualizar_classificacao!)
+      end
+
+      @bolao.chutar!
+    end
   end
 end

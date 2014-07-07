@@ -12,6 +12,8 @@ class Bolao
       jogo.atualizar_placar!(gerar_random, gerar_random)
       jogo.placar
     end
+
+    @copa.grupos.each { |grupo| grupo.atualizar_classificacao! }
   end
 
   private

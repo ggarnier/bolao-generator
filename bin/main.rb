@@ -20,3 +20,6 @@ copa.grupos.each do |grupo|
   puts ""
   puts ""
 end
+
+puts "Oitavas de final"
+puts copa.calcular_jogos_oitavas.map(&:placar)

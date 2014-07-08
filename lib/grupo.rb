@@ -34,6 +34,10 @@ class Grupo
     reordenar_times
   end
 
+  def classificados
+    @times[0,2]
+  end
+
   private
   def zerar_pontuacao
     @times.each { |time| time.pontos = 0 }

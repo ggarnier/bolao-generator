@@ -6,6 +6,15 @@ describe Grupo do
     @grupo = Grupo.new("grupo" => "A", "times" => %w{Brasil Croácia México Camarões})
   end
 
+  let :atualizar_resultados_grupo do
+    @grupo.jogos.at(0).atualizar_placar!(3, 1)
+    @grupo.jogos.at(1).atualizar_placar!(0, 0)
+    @grupo.jogos.at(2).atualizar_placar!(4, 1)
+    @grupo.jogos.at(3).atualizar_placar!(1, 3)
+    @grupo.jogos.at(4).atualizar_placar!(4, 0)
+    @grupo.jogos.at(5).atualizar_placar!(1, 0)
+  end
+
   it "deveria instanciar os times" do
     expect(@grupo.times.size).to eql 4
     @grupo.times.each do |time|
@@ -27,12 +36,7 @@ describe Grupo do
 
   describe "#atualizar_classificacao!" do
     before do
-      @grupo.jogos.at(0).atualizar_placar!(3, 1)
-      @grupo.jogos.at(1).atualizar_placar!(0, 0)
-      @grupo.jogos.at(2).atualizar_placar!(4, 1)
-      @grupo.jogos.at(3).atualizar_placar!(1, 3)
-      @grupo.jogos.at(4).atualizar_placar!(4, 0)
-      @grupo.jogos.at(5).atualizar_placar!(1, 0)
+      atualizar_resultados_grupo
 
       @grupo.atualizar_classificacao!
     end
@@ -43,6 +47,16 @@ describe Grupo do
 
     it "deveria reordenar os times de acordo com a classificação" do
       expect(@grupo.times.map(&:nome)).to eql %w{Brasil México Croácia Camarões}
+    end
+  end
+
+  describe "#classificados" do
+    before do
+      atualizar_resultados_grupo
+    end
+
+    it "deveria retornar os times classificados" do
+      expect(@grupo.classificados).to eql [@grupo.times.at(0), @grupo.times.at(1)]
     end
   end
 end

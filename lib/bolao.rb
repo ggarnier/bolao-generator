@@ -7,21 +7,27 @@ class Bolao
     @copa = copa
   end
 
-  def chutar!
-    chutar_primeira_fase!
-  end
-
-  private
-  def gerar_random
-    rand(5)
-  end
-
   def chutar_primeira_fase!
     @copa.jogos_primeira_fase.map do |jogo|
-      jogo.atualizar_placar!(gerar_random, gerar_random)
+      chutar_jogo(jogo)
       jogo.placar
     end
 
-    @copa.grupos.each { |grupo| grupo.atualizar_classificacao! }
+    @copa.atualizar_classificacao!
+  end
+
+  def chutar_oitavas!
+    @copa.jogos_oitavas.each do |jogo|
+      chutar_jogo(jogo)
+    end
+  end
+
+  private
+  def chutar_jogo(jogo)
+    jogo.atualizar_placar!(gerar_random, gerar_random)
+  end
+
+  def gerar_random
+    rand(5)
   end
 end

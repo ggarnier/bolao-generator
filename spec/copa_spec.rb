@@ -24,15 +24,9 @@ describe Copa do
 
       @copa.atualizar_classificacao!
     end
-
-    it "deveria calcular os jogos das oitavas de final" do
-      expect(@copa).to receive(:calcular_jogos_oitavas)
-
-      @copa.atualizar_classificacao!
-    end
   end
 
-  describe "#calcular_jogos_oitavas" do
+  describe "#jogos_oitavas" do
     it "deveria retornar os cruzamentos dos classificados da primeira fase" do
       allow(@copa.grupos.first).
         to receive(:classificados).
@@ -42,7 +36,7 @@ describe Copa do
         to receive(:classificados).
         and_return(["Holanda", "Chile"])
 
-      jogos_oitavas = @copa.calcular_jogos_oitavas
+      jogos_oitavas = @copa.jogos_oitavas
       expect(jogos_oitavas.size).to eql @copa.grupos.size
 
       jogo1 = jogos_oitavas.first

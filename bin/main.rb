@@ -5,7 +5,8 @@ processador = Processador.new("./bin/grupos.json")
 grupos = processador.gerar_grupos
 copa = Copa.new(grupos)
 bolao = Bolao.new(copa)
-bolao.chutar!
+
+bolao.chutar_primeira_fase!
 copa.grupos.each do |grupo|
   puts "Grupo #{grupo.nome}"
   puts "-------"
@@ -21,5 +22,7 @@ copa.grupos.each do |grupo|
   puts ""
 end
 
+bolao.chutar_oitavas!
 puts "Oitavas de final"
-puts copa.calcular_jogos_oitavas.map(&:placar)
+puts "----------------"
+puts copa.jogos_oitavas.map(&:placar)

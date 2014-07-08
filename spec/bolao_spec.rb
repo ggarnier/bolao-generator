@@ -10,13 +10,13 @@ describe Bolao do
     @bolao = Bolao.new(@copa)
   end
 
-  describe "#chutar!" do
-    it "deveria gerar chutes para todos os jogos dos grupos" do
+  describe "#chutar_primeira_fase!" do
+    it "deveria gerar chutes para todos os jogos da primeira fase" do
       @grupos.map(&:jogos).flatten.each do |jogo|
         expect(jogo).to receive(:atualizar_placar!)
       end
 
-      @bolao.chutar!
+      @bolao.chutar_primeira_fase!
     end
 
     it "deveria atualizar a classificação de todos os grupos" do
@@ -24,7 +24,16 @@ describe Bolao do
         expect(grupo).to receive(:atualizar_classificacao!)
       end
 
-      @bolao.chutar!
+      @bolao.chutar_primeira_fase!
+    end
+  end
+
+  describe "#chutar_oitavas!" do
+    it "deveria gerar chutes para todos os jogos das oitavas de final" do
+      jogos = @copa.jogos_oitavas
+      jogos.each { |j| expect(j).to receive(:atualizar_placar!) }
+
+      @bolao.chutar_oitavas!
     end
   end
 end

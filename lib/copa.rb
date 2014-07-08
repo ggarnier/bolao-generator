@@ -13,17 +13,14 @@ class Copa
 
   def atualizar_classificacao!
     @grupos.each { |grupo| grupo.atualizar_classificacao! }
-
-    calcular_jogos_oitavas
   end
 
-  def calcular_jogos_oitavas
-    jogos = []
-    @grupos.each_with_index do |_, i|
-      j = (i.even? ? i+1 : i-1)
-      jogos << Jogo.new(@grupos.at(i).classificados.first, @grupos.at(j).classificados.last)
+  def jogos_oitavas
+    @jogos_oitavas ||= begin
+      @grupos.map.each_with_index do |_, i|
+        j = (i.even? ? i+1 : i-1)
+        Jogo.new(@grupos.at(i).classificados.first, @grupos.at(j).classificados.last)
+      end
     end
-
-    jogos
   end
 end

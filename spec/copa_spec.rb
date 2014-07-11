@@ -16,13 +16,13 @@ describe Copa do
     end
   end
 
-  describe "#atualizar_classificacao!" do
+  describe "#atualizar_classificacao_primeira_fase!" do
     it "deveria atualizar a classificação de todos os grupos" do
       @copa.grupos.each do |grupo|
         expect(grupo).to receive(:atualizar_classificacao!)
       end
 
-      @copa.atualizar_classificacao!
+      @copa.atualizar_classificacao_primeira_fase!
     end
   end
 

@@ -11,7 +11,7 @@ class Copa
     @jogos ||= @grupos.map(&:jogos).flatten
   end
 
-  def atualizar_classificacao!
+  def atualizar_classificacao_primeira_fase!
     @grupos.each { |grupo| grupo.atualizar_classificacao! }
   end
 

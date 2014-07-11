@@ -8,26 +8,43 @@ class Bolao
   end
 
   def chutar_primeira_fase!
-    @copa.jogos_primeira_fase.map do |jogo|
+    @copa.jogos_primeira_fase.each do |jogo|
       chutar_jogo(jogo)
-      jogo.placar
     end
 
-    @copa.atualizar_classificacao!
+    @copa.atualizar_classificacao_primeira_fase!
   end
 
   def chutar_oitavas!
     @copa.jogos_oitavas.each do |jogo|
-      chutar_jogo(jogo)
+      chutar_jogo(jogo, penaltis: true)
     end
   end
 
-  private
-  def chutar_jogo(jogo)
+  def chutar_jogo jogo, args = {}
     jogo.atualizar_placar!(gerar_random, gerar_random)
+
+    if jogo.empate? && args[:penaltis]
+      chutar_disputa_penaltis(jogo)
+    end
   end
+
+  def chutar_disputa_penaltis jogo
+    begin
+      penaltis_time1 = gerar_random
+      penaltis_time2 = gerar_random
+    end while penaltis_time1 == penaltis_time2
+
+    jogo.atualizar_penaltis!(penaltis_time1, penaltis_time2)
+  end
+
+  private
 
   def gerar_random
     rand(5)
+  end
+
+  def gerar_random_penaltis
+
   end
 end

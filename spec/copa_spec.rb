@@ -48,4 +48,28 @@ describe Copa do
       expect(jogo2.time2).to eql "México"
     end
   end
+
+  describe "#jogos_quartas" do
+    it "deveria retornar os cruzamentos dos classificados das oitavas de final" do
+      allow(@copa).
+        to receive(:jogos_oitavas).
+        and_return(
+          8.times.map do |i|
+            time1 = Selecao.new("time #{i+1}")
+            time2 = Selecao.new("time #{i+9}")
+            jogo = Jogo.new(time1, time2)
+            allow(jogo).to receive(:vencedor).and_return(time1)
+            jogo
+          end
+        )
+
+      jogos_quartas = @copa.jogos_quartas
+
+      expect(jogos_quartas.size).to eql 4
+      jogos_quartas.each_with_index do |jogo, i|
+        expect(jogo.time1.nome).to eql "time #{i+1}"
+        expect(jogo.time2.nome).to eql "time #{i+5}"
+      end
+    end
+  end
 end

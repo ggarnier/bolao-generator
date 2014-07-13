@@ -23,4 +23,13 @@ class Copa
       end
     end
   end
+
+  def jogos_quartas
+    @jogos_quartas ||= begin
+      times_classificados = jogos_oitavas.map { |j| j.vencedor(penaltis: true) }
+      (0..3).map do |i|
+        Jogo.new(times_classificados.at(i), times_classificados.at(i+4))
+      end
+    end
+  end
 end

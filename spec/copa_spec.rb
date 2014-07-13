@@ -85,8 +85,8 @@ describe Copa do
 
       expect(jogos_quartas.size).to eql 4
       jogos_quartas.each_with_index do |jogo, i|
-        expect(jogo.time1.nome).to eql "time #{i+1}"
-        expect(jogo.time2.nome).to eql "time #{i+5}"
+        expect(jogo.time1.nome).to eql "time #{2*i+1}"
+        expect(jogo.time2.nome).to eql "time #{2*i+2}"
       end
     end
   end

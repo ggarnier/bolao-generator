@@ -17,7 +17,7 @@ class Copa
 
   def jogos_oitavas
     @jogos_oitavas ||= begin
-      ordem_grupos.map.each do |i|
+      ordem_cruzamento_grupos.map.each do |i|
         j = (i.even? ? i+1 : i-1)
         Jogo.new(@grupos.at(i).classificados.first, @grupos.at(j).classificados.last)
       end
@@ -27,16 +27,16 @@ class Copa
   def jogos_quartas
     @jogos_quartas ||= begin
       times_classificados = jogos_oitavas.map { |j| j.vencedor(penaltis: true) }
-      (0..3).map do |i|
-        Jogo.new(times_classificados.at(i), times_classificados.at(i+4))
+      (0..7).step(2).map do |i|
+        Jogo.new(times_classificados.at(i), times_classificados.at(i+1))
       end
     end
   end
 
   private
 
-  def ordem_grupos
-    ordem = (0...@grupos.size).to_a
-    ordem.select { |a| a.even? } + ordem.select { |a| a.odd? }
+  def ordem_cruzamento_grupos
+    # Primeiro os pares, depois os impares
+    (0...@grupos.size).step(2).to_a + (1..@grupos.size).step(2).to_a
   end
 end

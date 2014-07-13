@@ -17,7 +17,7 @@ class Copa
 
   def jogos_oitavas
     @jogos_oitavas ||= begin
-      @grupos.map.each_with_index do |_, i|
+      ordem_grupos.map.each do |i|
         j = (i.even? ? i+1 : i-1)
         Jogo.new(@grupos.at(i).classificados.first, @grupos.at(j).classificados.last)
       end
@@ -31,5 +31,12 @@ class Copa
         Jogo.new(times_classificados.at(i), times_classificados.at(i+4))
       end
     end
+  end
+
+  private
+
+  def ordem_grupos
+    ordem = (0...@grupos.size).to_a
+    ordem.select { |a| a.even? } + ordem.select { |a| a.odd? }
   end
 end

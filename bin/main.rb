@@ -29,6 +29,13 @@ puts copa.jogos_oitavas.map { |j| j.placar(penaltis: true) }
 puts ""
 puts ""
 
+bolao.chutar_quartas!
 puts "Quartas de final"
 puts "----------------"
 puts copa.jogos_quartas.map { |j| j.placar(penaltis: true) }
+puts ""
+puts ""
+
+puts "Semifinal"
+puts "----------------"
+puts copa.jogos_semifinal.map { |j| j.placar(penaltis: true) }

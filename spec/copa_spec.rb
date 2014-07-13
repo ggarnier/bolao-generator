@@ -90,4 +90,28 @@ describe Copa do
       end
     end
   end
+
+  describe "#jogos_semifinal" do
+    it "deveria retornar os cruzamentos dos classificados das quartas de final" do
+      allow(@copa).
+        to receive(:jogos_quartas).
+        and_return(
+          4.times.map do |i|
+            time1 = Selecao.new("time #{i+1}")
+            time2 = Selecao.new("time #{i+5}")
+            jogo = Jogo.new(time1, time2)
+            allow(jogo).to receive(:vencedor).and_return(time1)
+            jogo
+          end
+        )
+
+      jogos_semifinal = @copa.jogos_semifinal
+
+      expect(jogos_semifinal.size).to eql 2
+      jogos_semifinal.each_with_index do |jogo, i|
+        expect(jogo.time1.nome).to eql "time #{2*i+1}"
+        expect(jogo.time2.nome).to eql "time #{2*i+2}"
+      end
+    end
+  end
 end

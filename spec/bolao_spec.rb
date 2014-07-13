@@ -41,6 +41,17 @@ describe Bolao do
     end
   end
 
+  describe "#chutar_quartas!" do
+    it "deveria gerar chutes para todos os jogos das quartas de final" do
+      jogos = @copa.jogos_quartas
+      jogos.each do |jogo|
+        expect(@bolao).to receive(:chutar_jogo).with(jogo, penaltis: true)
+      end
+
+      @bolao.chutar_quartas!
+    end
+  end
+
   describe "#chutar_jogo" do
     let(:jogo) { @grupo_a.jogos.first }
 

@@ -42,6 +42,15 @@ class Copa
     end
   end
 
+  def jogo_terceiro_lugar
+    @jogo_terceiro_lugar ||= begin
+      times = jogos_semifinal.map { |j| [j.time1, j.time2] }.flatten
+      times_final = [jogo_final.time1, jogo_final.time2]
+      times_classificados = times - times_final
+      Jogo.new(times_classificados.first, times_classificados.last)
+    end
+  end
+
   def jogo_final
     @jogo_final ||= begin
       times_classificados = jogos_semifinal.map { |j| j.vencedor(penaltis: true) }

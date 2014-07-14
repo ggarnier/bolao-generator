@@ -38,8 +38,18 @@ puts ""
 
 bolao.chutar_semifinal!
 puts "Semifinal"
-puts "----------------"
+puts "----------"
 puts copa.jogos_semifinal.map { |j| j.placar(penaltis: true) }
+puts ""
+puts ""
+
+bolao.chutar_terceiro_lugar!
+jogo = copa.jogo_terceiro_lugar
+terceiro_lugar = jogo.vencedor(penaltis: true)
+puts "Decisão do terceiro lugar"
+puts "-------------------------"
+puts jogo.placar(penaltis: true)
+puts "Terceiro lugar: #{terceiro_lugar.nome}"
 puts ""
 puts ""
 
@@ -47,6 +57,6 @@ bolao.chutar_final!
 final = copa.jogo_final
 campeao = final.vencedor(penaltis: true)
 puts "Final"
-puts "----------------"
+puts "-----"
 puts final.placar(penaltis: true)
 puts "Campeao: #{campeao.nome}"

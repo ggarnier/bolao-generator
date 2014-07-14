@@ -33,6 +33,10 @@ class Bolao
     end
   end
 
+  def chutar_terceiro_lugar!
+    chutar_jogo(@copa.jogo_terceiro_lugar, penaltis: true)
+  end
+
   def chutar_final!
     chutar_jogo(@copa.jogo_final, penaltis: true)
   end

@@ -63,6 +63,15 @@ describe Bolao do
     end
   end
 
+  describe "#chutar_terceiro_lugar!" do
+    it "deveria gerar chute para a decisão do terceiro lugar" do
+      jogo = @copa.jogo_terceiro_lugar
+      expect(@bolao).to receive(:chutar_jogo).with(jogo, penaltis: true)
+
+      @bolao.chutar_terceiro_lugar!
+    end
+  end
+
   describe "#chutar_final!" do
     it "deveria gerar chute para a final" do
       jogo = @copa.jogo_final

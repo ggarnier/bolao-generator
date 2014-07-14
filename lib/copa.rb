@@ -58,6 +58,10 @@ class Copa
     end
   end
 
+  def campeao
+    jogo_final.vencedor(penaltis: true)
+  end
+
   private
 
   def ordem_cruzamento_grupos

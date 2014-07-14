@@ -54,9 +54,7 @@ puts ""
 puts ""
 
 bolao.chutar_final!
-final = copa.jogo_final
-campeao = final.vencedor(penaltis: true)
 puts "Final"
 puts "-----"
-puts final.placar(penaltis: true)
-puts "Campeao: #{campeao.nome}"
+puts copa.jogo_final.placar(penaltis: true)
+puts "Campeao: #{copa.campeao.nome}"

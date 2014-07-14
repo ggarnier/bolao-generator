@@ -154,4 +154,19 @@ describe Copa do
       expect(final.time2.nome).to eql "time 2"
     end
   end
+
+  describe "#campeao" do
+    it "deveria exibir o vencedor da final" do
+      final = Jogo.new(Selecao.new("time 1"), Selecao.new("time 2"))
+      expect(@copa).
+        to receive(:jogo_final).
+        and_return(final)
+      expect(final).
+        to receive(:vencedor).
+        with(penaltis: true).
+        and_return(final.time2)
+
+      expect(@copa.campeao.nome).to eql "time 2"
+    end
+  end
 end

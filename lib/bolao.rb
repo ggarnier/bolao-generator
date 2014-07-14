@@ -26,34 +26,34 @@ class Bolao
 
   def chutar_oitavas!
     @copa.jogos_oitavas.each do |jogo|
-      chutar_jogo(jogo, penaltis: true)
+      chutar_jogo(jogo)
     end
   end
 
   def chutar_quartas!
     @copa.jogos_quartas.each do |jogo|
-      chutar_jogo(jogo, penaltis: true)
+      chutar_jogo(jogo)
     end
   end
 
   def chutar_semifinal!
     @copa.jogos_semifinal.each do |jogo|
-      chutar_jogo(jogo, penaltis: true)
+      chutar_jogo(jogo)
     end
   end
 
   def chutar_terceiro_lugar!
-    chutar_jogo(@copa.jogo_terceiro_lugar, penaltis: true)
+    chutar_jogo(@copa.jogo_terceiro_lugar)
   end
 
   def chutar_final!
-    chutar_jogo(@copa.jogo_final, penaltis: true)
+    chutar_jogo(@copa.jogo_final)
   end
 
-  def chutar_jogo jogo, args = {}
+  def chutar_jogo jogo
     jogo.atualizar_placar!(gerar_random, gerar_random)
 
-    if jogo.empate? && args[:penaltis]
+    if jogo.empate? && jogo.desempate_nos_penaltis
       chutar_disputa_penaltis(jogo)
     end
   end

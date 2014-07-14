@@ -24,32 +24,32 @@ end
 
 puts "Oitavas de final"
 puts "----------------"
-puts copa.jogos_oitavas.map { |j| j.placar(penaltis: true) }
+puts copa.jogos_oitavas.map { |j| j.placar }
 puts ""
 puts ""
 
 puts "Quartas de final"
 puts "----------------"
-puts copa.jogos_quartas.map { |j| j.placar(penaltis: true) }
+puts copa.jogos_quartas.map { |j| j.placar }
 puts ""
 puts ""
 
 puts "Semifinal"
 puts "----------"
-puts copa.jogos_semifinal.map { |j| j.placar(penaltis: true) }
+puts copa.jogos_semifinal.map { |j| j.placar }
 puts ""
 puts ""
 
 jogo = copa.jogo_terceiro_lugar
-terceiro_lugar = jogo.vencedor(penaltis: true)
+terceiro_lugar = jogo.vencedor
 puts "Decisão do terceiro lugar"
 puts "-------------------------"
-puts jogo.placar(penaltis: true)
+puts jogo.placar
 puts "Terceiro lugar: #{terceiro_lugar.nome}"
 puts ""
 puts ""
 
 puts "Final"
 puts "-----"
-puts copa.jogo_final.placar(penaltis: true)
+puts copa.jogo_final.placar
 puts "Campeao: #{copa.campeao.nome}"

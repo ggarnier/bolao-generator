@@ -3,8 +3,10 @@ require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib', 'jogo'))
 
 describe Jogo do
   before do
-    @jogo = Jogo.new(Selecao.new("Brasil"), Selecao.new("Croácia"))
+    @jogo = Jogo.new(Selecao.new("Brasil"), Selecao.new("Croácia"), args)
   end
+
+  let(:args) { {} }
 
   describe "#placar" do
     it "deveria exibir o placar do jogo" do
@@ -21,14 +23,16 @@ describe Jogo do
       end
     end
 
-    context "quando h;a disputa de pênaltis" do
+    context "quando há disputa de pênaltis" do
+      let(:args) { { penaltis: true } }
+
       before do
         @jogo.atualizar_placar!(1, 1)
         @jogo.atualizar_penaltis!(4, 2)
       end
 
       it "deveria exibir o placar com pênaltis" do
-        expect(@jogo.placar(penaltis: true)).to eql "Brasil 1 (4) x (2) 1 Croácia"
+        expect(@jogo.placar).to eql "Brasil 1 (4) x (2) 1 Croácia"
       end
     end
   end
@@ -94,8 +98,10 @@ describe Jogo do
           @jogo.atualizar_penaltis!(5, 4)
         end
 
+        let(:args) { { penaltis: true } }
+
         it "deveria retornar o time que venceu a disputa de pênaltis" do
-          expect(@jogo.vencedor(penaltis: true)).to eql @jogo.time1
+          expect(@jogo.vencedor).to eql @jogo.time1
         end
       end
     end

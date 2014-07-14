@@ -75,7 +75,7 @@ describe Copa do
           8.times.map do |i|
             time1 = Selecao.new("time #{i+1}")
             time2 = Selecao.new("time #{i+9}")
-            jogo = Jogo.new(time1, time2)
+            jogo = Jogo.new(time1, time2, penaltis: true)
             allow(jogo).to receive(:vencedor).and_return(time1)
             jogo
           end
@@ -99,7 +99,7 @@ describe Copa do
           4.times.map do |i|
             time1 = Selecao.new("time #{i+1}")
             time2 = Selecao.new("time #{i+5}")
-            jogo = Jogo.new(time1, time2)
+            jogo = Jogo.new(time1, time2, penaltis: true)
             allow(jogo).to receive(:vencedor).and_return(time1)
             jogo
           end
@@ -123,7 +123,7 @@ describe Copa do
           2.times.map do |i|
             time1 = Selecao.new("time #{i+1}")
             time2 = Selecao.new("time #{i+3}")
-            jogo = Jogo.new(time1, time2)
+            jogo = Jogo.new(time1, time2, penaltis: true)
             allow(jogo).to receive(:vencedor).and_return(time1)
             jogo
           end
@@ -143,7 +143,7 @@ describe Copa do
           2.times.map do |i|
             time1 = Selecao.new("time #{i+1}")
             time2 = Selecao.new("time #{i+3}")
-            jogo = Jogo.new(time1, time2)
+            jogo = Jogo.new(time1, time2, penaltis: true)
             allow(jogo).to receive(:vencedor).and_return(time1)
             jogo
           end
@@ -157,13 +157,12 @@ describe Copa do
 
   describe "#campeao" do
     it "deveria exibir o vencedor da final" do
-      final = Jogo.new(Selecao.new("time 1"), Selecao.new("time 2"))
+      final = Jogo.new(Selecao.new("time 1"), Selecao.new("time 2"), penaltis: true)
       expect(@copa).
         to receive(:jogo_final).
         and_return(final)
       expect(final).
         to receive(:vencedor).
-        with(penaltis: true).
         and_return(final.time2)
 
       expect(@copa.campeao.nome).to eql "time 2"

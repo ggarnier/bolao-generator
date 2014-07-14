@@ -19,25 +19,25 @@ class Copa
     @jogos_oitavas ||= begin
       ordem_cruzamento_grupos.map.each do |i|
         j = (i.even? ? i+1 : i-1)
-        Jogo.new(@grupos.at(i).classificados.first, @grupos.at(j).classificados.last)
+        Jogo.new(@grupos.at(i).classificados.first, @grupos.at(j).classificados.last, penaltis: true)
       end
     end
   end
 
   def jogos_quartas
     @jogos_quartas ||= begin
-      times_classificados = jogos_oitavas.map { |j| j.vencedor(penaltis: true) }
+      times_classificados = jogos_oitavas.map { |j| j.vencedor }
       (0..7).step(2).map do |i|
-        Jogo.new(times_classificados.at(i), times_classificados.at(i+1))
+        Jogo.new(times_classificados.at(i), times_classificados.at(i+1), penaltis: true)
       end
     end
   end
 
   def jogos_semifinal
     @jogos_semifinal ||= begin
-      times_classificados = jogos_quartas.map { |j| j.vencedor(penaltis: true) }
+      times_classificados = jogos_quartas.map { |j| j.vencedor }
       (0..3).step(2).map do |i|
-        Jogo.new(times_classificados.at(i), times_classificados.at(i+1))
+        Jogo.new(times_classificados.at(i), times_classificados.at(i+1), penaltis: true)
       end
     end
   end
@@ -47,19 +47,19 @@ class Copa
       times = jogos_semifinal.map { |j| [j.time1, j.time2] }.flatten
       times_final = [jogo_final.time1, jogo_final.time2]
       times_classificados = times - times_final
-      Jogo.new(times_classificados.first, times_classificados.last)
+      Jogo.new(times_classificados.first, times_classificados.last, penaltis: true)
     end
   end
 
   def jogo_final
     @jogo_final ||= begin
-      times_classificados = jogos_semifinal.map { |j| j.vencedor(penaltis: true) }
-      Jogo.new(times_classificados.first, times_classificados.last)
+      times_classificados = jogos_semifinal.map { |j| j.vencedor }
+      Jogo.new(times_classificados.first, times_classificados.last, penaltis: true)
     end
   end
 
   def campeao
-    jogo_final.vencedor(penaltis: true)
+    jogo_final.vencedor
   end
 
   private

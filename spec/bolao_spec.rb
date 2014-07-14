@@ -47,7 +47,7 @@ describe Bolao do
     it "deveria gerar chutes para todos os jogos das oitavas de final" do
       jogos = @copa.jogos_oitavas
       jogos.each do |jogo|
-        expect(@bolao).to receive(:chutar_jogo).with(jogo, penaltis: true)
+        expect(@bolao).to receive(:chutar_jogo)
       end
 
       @bolao.chutar_oitavas!
@@ -58,7 +58,7 @@ describe Bolao do
     it "deveria gerar chutes para todos os jogos das quartas de final" do
       jogos = @copa.jogos_quartas
       jogos.each do |jogo|
-        expect(@bolao).to receive(:chutar_jogo).with(jogo, penaltis: true)
+        expect(@bolao).to receive(:chutar_jogo)
       end
 
       @bolao.chutar_quartas!
@@ -69,7 +69,7 @@ describe Bolao do
     it "deveria gerar chutes para todos os jogos das semifinais" do
       jogos = @copa.jogos_semifinal
       jogos.each do |jogo|
-        expect(@bolao).to receive(:chutar_jogo).with(jogo, penaltis: true)
+        expect(@bolao).to receive(:chutar_jogo)
       end
 
       @bolao.chutar_semifinal!
@@ -79,7 +79,7 @@ describe Bolao do
   describe "#chutar_terceiro_lugar!" do
     it "deveria gerar chute para a decisão do terceiro lugar" do
       jogo = @copa.jogo_terceiro_lugar
-      expect(@bolao).to receive(:chutar_jogo).with(jogo, penaltis: true)
+      expect(@bolao).to receive(:chutar_jogo)
 
       @bolao.chutar_terceiro_lugar!
     end
@@ -88,7 +88,7 @@ describe Bolao do
   describe "#chutar_final!" do
     it "deveria gerar chute para a final" do
       jogo = @copa.jogo_final
-      expect(@bolao).to receive(:chutar_jogo).with(jogo, penaltis: true)
+      expect(@bolao).to receive(:chutar_jogo)
 
       @bolao.chutar_final!
     end
@@ -111,11 +111,13 @@ describe Bolao do
       end
 
       context "e o jogo permite decisão por pênaltis" do
+        let(:jogo) { Jogo.new(@grupo_a.times.at(0), @grupo_a.times.at(1), penaltis: true) }
+
         it "deveria chutar o resultado da disputa de pênaltis" do
           expect(@bolao).
             to receive(:chutar_disputa_penaltis)
 
-          @bolao.chutar_jogo(jogo, penaltis: true)
+          @bolao.chutar_jogo(jogo)
         end
       end
 
@@ -124,7 +126,7 @@ describe Bolao do
           expect(@bolao).
             not_to receive(:chutar_disputa_penaltis)
 
-          @bolao.chutar_jogo(jogo, penaltis: false)
+          @bolao.chutar_jogo(jogo)
         end
       end
     end

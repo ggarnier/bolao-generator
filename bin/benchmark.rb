@@ -28,7 +28,7 @@ puts "Final entre Alemanha e Argentina"
 benchmark { |copa| [copa.jogo_final.time1.nome, copa.jogo_final.time2.nome].sort == ["Alemanha", "Argentina"] }
 puts ""
 
-puts "Placar exato da final entre Alemanha e Argentina"
+puts "Alemanha 1 x 0 Argentina na final"
 benchmark do |copa|
   final = copa.jogo_final
   final.placar == "Alemanha 1 x 0 Argentina" || final.placar == "Argentina 0 x 1 Alemanha"

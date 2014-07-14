@@ -10,6 +10,19 @@ describe Bolao do
     @bolao = Bolao.new(@copa)
   end
 
+  describe "#chutar_resultados!" do
+    it "deveria gerar chutes para todas as fases da copa" do
+      expect(@bolao).to receive(:chutar_primeira_fase!)
+      expect(@bolao).to receive(:chutar_oitavas!)
+      expect(@bolao).to receive(:chutar_quartas!)
+      expect(@bolao).to receive(:chutar_semifinal!)
+      expect(@bolao).to receive(:chutar_terceiro_lugar!)
+      expect(@bolao).to receive(:chutar_final!)
+
+      @bolao.chutar_resultados!
+    end
+  end
+
   describe "#chutar_primeira_fase!" do
     it "deveria gerar chutes para todos os jogos da primeira fase" do
       jogos = @grupos.map(&:jogos).flatten

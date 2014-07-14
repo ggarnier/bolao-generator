@@ -7,6 +7,15 @@ class Bolao
     @copa = copa
   end
 
+  def chutar_resultados!
+    chutar_primeira_fase!
+    chutar_oitavas!
+    chutar_quartas!
+    chutar_semifinal!
+    chutar_terceiro_lugar!
+    chutar_final!
+  end
+
   def chutar_primeira_fase!
     @copa.jogos_primeira_fase.each do |jogo|
       chutar_jogo(jogo)

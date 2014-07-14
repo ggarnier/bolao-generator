@@ -5,8 +5,8 @@ processador = Processador.new("./bin/grupos.json")
 grupos = processador.gerar_grupos
 copa = Copa.new(grupos)
 bolao = Bolao.new(copa)
+bolao.chutar_resultados!
 
-bolao.chutar_primeira_fase!
 copa.grupos.each do |grupo|
   puts "Grupo #{grupo.nome}"
   puts "-------"
@@ -22,28 +22,24 @@ copa.grupos.each do |grupo|
   puts ""
 end
 
-bolao.chutar_oitavas!
 puts "Oitavas de final"
 puts "----------------"
 puts copa.jogos_oitavas.map { |j| j.placar(penaltis: true) }
 puts ""
 puts ""
 
-bolao.chutar_quartas!
 puts "Quartas de final"
 puts "----------------"
 puts copa.jogos_quartas.map { |j| j.placar(penaltis: true) }
 puts ""
 puts ""
 
-bolao.chutar_semifinal!
 puts "Semifinal"
 puts "----------"
 puts copa.jogos_semifinal.map { |j| j.placar(penaltis: true) }
 puts ""
 puts ""
 
-bolao.chutar_terceiro_lugar!
 jogo = copa.jogo_terceiro_lugar
 terceiro_lugar = jogo.vencedor(penaltis: true)
 puts "Decisão do terceiro lugar"
@@ -53,7 +49,6 @@ puts "Terceiro lugar: #{terceiro_lugar.nome}"
 puts ""
 puts ""
 
-bolao.chutar_final!
 puts "Final"
 puts "-----"
 puts copa.jogo_final.placar(penaltis: true)

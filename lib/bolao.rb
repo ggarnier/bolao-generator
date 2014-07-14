@@ -33,6 +33,10 @@ class Bolao
     end
   end
 
+  def chutar_final!
+    chutar_jogo(@copa.jogo_final, penaltis: true)
+  end
+
   def chutar_jogo jogo, args = {}
     jogo.atualizar_placar!(gerar_random, gerar_random)
 

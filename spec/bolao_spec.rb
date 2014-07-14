@@ -63,6 +63,15 @@ describe Bolao do
     end
   end
 
+  describe "#chutar_final!" do
+    it "deveria gerar chute para a final" do
+      jogo = @copa.jogo_final
+      expect(@bolao).to receive(:chutar_jogo).with(jogo, penaltis: true)
+
+      @bolao.chutar_final!
+    end
+  end
+
   describe "#chutar_jogo" do
     let(:jogo) { @grupo_a.jogos.first }
 

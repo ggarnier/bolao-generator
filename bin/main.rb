@@ -36,6 +36,7 @@ puts copa.jogos_quartas.map { |j| j.placar(penaltis: true) }
 puts ""
 puts ""
 
+bolao.chutar_semifinal!
 puts "Semifinal"
 puts "----------------"
 puts copa.jogos_semifinal.map { |j| j.placar(penaltis: true) }

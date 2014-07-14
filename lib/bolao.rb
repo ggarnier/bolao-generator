@@ -27,6 +27,12 @@ class Bolao
     end
   end
 
+  def chutar_semifinal!
+    @copa.jogos_semifinal.each do |jogo|
+      chutar_jogo(jogo, penaltis: true)
+    end
+  end
+
   def chutar_jogo jogo, args = {}
     jogo.atualizar_placar!(gerar_random, gerar_random)
 

@@ -70,7 +70,7 @@ class Bolao
   private
 
   def gerar_random
-    rand(5)
+    rand(8)
   end
 
   def gerar_random_penaltis

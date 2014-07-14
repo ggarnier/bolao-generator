@@ -33,3 +33,11 @@ benchmark do |copa|
   final = copa.jogo_final
   final.placar == "Alemanha 1 x 0 Argentina" || final.placar == "Argentina 0 x 1 Alemanha"
 end
+puts ""
+
+puts "Brasil 1 x 7 Alemanha na semifinal"
+benchmark do |copa|
+  copa.jogos_semifinal.any? do |jogo|
+    jogo.placar == "Brasil 1 x 7 Alemanha"
+  end
+end

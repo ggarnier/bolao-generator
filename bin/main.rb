@@ -40,3 +40,9 @@ bolao.chutar_semifinal!
 puts "Semifinal"
 puts "----------------"
 puts copa.jogos_semifinal.map { |j| j.placar(penaltis: true) }
+puts ""
+puts ""
+
+puts "Final"
+puts "----------------"
+puts copa.jogo_final.placar(penaltis: true)

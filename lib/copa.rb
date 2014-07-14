@@ -42,6 +42,13 @@ class Copa
     end
   end
 
+  def jogo_final
+    @jogo_final ||= begin
+      times_classificados = jogos_semifinal.map { |j| j.vencedor(penaltis: true) }
+      Jogo.new(times_classificados.first, times_classificados.last)
+    end
+  end
+
   private
 
   def ordem_cruzamento_grupos

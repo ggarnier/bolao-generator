@@ -114,4 +114,24 @@ describe Copa do
       end
     end
   end
+
+  describe "#jogo_final" do
+    it "deveria retornar os classificados da final" do
+      allow(@copa).
+        to receive(:jogos_semifinal).
+        and_return(
+          2.times.map do |i|
+            time1 = Selecao.new("time #{i+1}")
+            time2 = Selecao.new("time #{i+3}")
+            jogo = Jogo.new(time1, time2)
+            allow(jogo).to receive(:vencedor).and_return(time1)
+            jogo
+          end
+        )
+
+      final = @copa.jogo_final
+      expect(final.time1.nome).to eql "time 1"
+      expect(final.time2.nome).to eql "time 2"
+    end
+  end
 end
